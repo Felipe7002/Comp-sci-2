@@ -1,43 +1,40 @@
 #Author: Felipe Miguens
-#Date:
-#Dicription:
-#Bugs:
+#Date:5/1/24
+#Dicription: This is code that replicates the nastalgic board game battleships. The user gets told the amount of ammo they have and the amount of ships they have. The ships then gets randomly placed on the board
+#Bugs:none
 import random
 
-
+# generates randome ship location, does not take in anything, returns random ship location
 def create_random_ship():
     return random.randint(0, 5), random.randint(0, 5)
 
-
+# ask player if they would like to play battle ship again, askes their answer and if yes runs the game again
 def play_again():
-    try_again = input("Wanna play again? <Y>es or <N>o? >: ").lower()
-    if try_again == "y":
+    try_again = input("Wanna play again? yes or no? >: ").lower()
+    if try_again == "yes":
         play_game()
     else:
         print("Goodbye!")
         return
 
+#welcomes the player to the battleship game
+print("Welcome to the Battleship game!")
+     
+#tell you the instructions to the game
+print("Introductions:You have 10 ammo to take down the three ships on the map. Please enter cordenents 1-5 to chose where to shoot.")
 
-print("Welcome to the Battleship game!"
-      "\nYour main objective is to find and destroy all the hidden ships on map!\n")
-
-print("""\nIntroductions:
-\nYou have 10 ammo and there are 3 hidden ships on map.
-In order to hit them, you have to enter specific numbers for that location. For example:
-For the first row and first column, you have to write 1 and 1.
-I wish you good fortune in wars to come!\n""")
-
-
+# general game function that runs the game, greates game board generates random ships, asks user for guesses, returns whether the guess is right, and returns the computers guesses
 def play_game():
-    game_board = [["O", "O", "O", "O", "O"],
-                  ["O", "O", "O", "O", "O"],
-                  ["O", "O", "O", "O", "O"],
-                  ["O", "O", "O", "O", "O"],
-                  ["O", "O", "O", "O", "O"]]
+    game_board = [["O ", "O ", "O ", "O ", "O "],
+                  ["O ", "O ", "O ", "O ", "O "],
+                  ["O ", "O ", "O ", "O ", "O "],
+                  ["O ", "O ", "O ", "O ", "O "],
+                  ["O ", "O ", "O ", "O ", "O "],]
 
     for i in game_board:
         print(*i)
-
+    
+# creats and places 3 random ships on the playing board
     ship1 = create_random_ship()
     ship2 = create_random_ship()
     ship3 = create_random_ship()
@@ -56,22 +53,22 @@ def play_game():
             print("\nThe numbers must be between 1-5!")
             continue
 
-        row = row - 1 # Reducing number to desired index.
-        column = column - 1 # Reducing number to desired index.
+        row -= 1 # Reducing number to desired index.
+        column -= 1 # Reducing number to desired index.
 
-        if game_board[row][column] == "-" or game_board[row][column] == "X":
-            print("\nYou have already shoot that place!\n")
+        if game_board[row][column] == "💧" or game_board[row][column] == "💥":
+            print("You have already shoot that place!")
             continue
         elif (row, column) == ship1 or (row, column) == ship2 or (row, column) == ship3:
-            print("\nBoom! You hit! A ship has exploded! You were granted a new ammo!\n")
-            game_board[row][column] = "X"
+            print("You hit a ship! Your are given 1 new ammo")
+            game_board[row][column] = "💥"
             ships_left -= 1
             if ships_left == 0:
                 print("My my, i didn't know you were a sharpshooter! Congratz, you won!")
                 play_again()
         else:
             print("\nYou missed!\n")
-            game_board[row][column] = "-"
+            game_board[row][column] = "💧"
             ammo -= 1
 
         for i in game_board:
