@@ -2,6 +2,7 @@
 #Date:5/1/24
 #Dicription: This is code that replicates the nastalgic board game battleships. The user gets told the amount of ammo they have and the amount of ships they have. The ships then gets randomly placed on the board
 #Bugs:none
+#Testers:Chris
 import random
 
 # generates randome ship location, does not take in anything, returns random ship location
@@ -46,11 +47,11 @@ def play_game():
             row = int(input("Enter a row number between 1-5 >: "))
             column = int(input("Enter a column number between 1-5 >: "))
         except ValueError:
-            print("Only enter number!")
+            print("Only enter numbers!")
             continue
 
         if row not in range(1,6) or column not in range(1, 6):
-            print("\nThe numbers must be between 1-5!")
+            print("The numbers must be between 1-5!")
             continue
 
         row -= 1 # Reducing number to desired index.
@@ -64,10 +65,10 @@ def play_game():
             game_board[row][column] = "💥"
             ships_left -= 1
             if ships_left == 0:
-                print("My my, i didn't know you were a sharpshooter! Congratz, you won!")
+                print("YOU SUNK ALL THE SHIPS. CONGRATS ON THE WIN!")
                 play_again()
         else:
-            print("\nYou missed!\n")
+            print("You missed!")
             game_board[row][column] = "💧"
             ammo -= 1
 
