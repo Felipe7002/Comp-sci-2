@@ -1,0 +1,137 @@
+#Author: Felipe Miguens
+#Date:5/13/24
+#Dicription: This code showcases recursive functions and potential use cases.
+#Bugs:none
+#Sorces: google, worksheet from class
+
+
+
+def menu():
+    #takes - nothing
+    #calculates - nothing
+    #returns - the selection of the user (int), representing their choice of function
+    print("1) Factorial of a number")
+    print("2) Summation of a number")
+    print("3) Power/exponential function")
+    print("4) Fibonacci number's")
+    print("5) Sum of a number's digits")
+    print("6) Product of number's digits")
+    print("7) Product of two whole numbers")
+    print("8) Reverse the digits in a number")
+    print("9) Sum of numbers in a range")
+    print("10) Quit")
+
+    return int(input("Enter selection: "))
+
+def factorial(n):
+    #takes - a number
+    #calculates - calculates the factorial of the number through recursion
+    #returns - return the factorial
+    if n == 0:
+        return 1
+    else:
+        return n * factorial(n-1)
+
+def summation(n):
+    #takes -  The number to calculate the summation of
+    #calculates - The summation of the number.
+    #returns -  If the recursion limit is reached
+    if n == 0:
+        return 1
+    else:
+        return n + summation(n-1)
+def powers(a, n):
+    #takes - a(int): the base number.     n(int): The Exponent
+    #calculates - The result of a raised to the power of n
+    #returns - If the recursion limit is reached.
+    if n == 0:
+        return 1
+    else:
+        return a * powers(a,n-1)
+
+def fibonacci(n):
+    #takes - The position in the Fibonacci sequence.
+    #calculates - The nth Fibonacci number.
+    #returns -  If the recursion limit is reached.
+    if n == 0:
+        return 1
+    else:
+        return fibonacci(n-1) + fibonacci(n-2)
+
+def sum_of_digits(n):
+    #takes - The number to calculate the sum of its digits.
+    #calculates - The sum of the digits of the number
+    #returns - If the recursion limit is reached
+    if n < 10:
+        return 1
+    else:
+       return n % 10 + sum_of_digits(n // 10)
+def product_of_digits(n):
+    #takes - The number to calculate the product of its digits
+    #calculates - The product of the digits of the number
+    #returns -  If the recursion limit is reached
+    if n < 10:
+        return n
+    else:
+       return n % 10 + product_of_digits(n // 10)
+    
+def product_two_whole_numbers(a, b):
+    #takes - a(int): the first number       b(int): The second number
+    #calculates - The product of the two numbers
+    #returns -   If the recursion limit is reached
+    if b == 0:
+        return 0
+    else: 
+        return a + product_two_whole_numbers(a, b - 1)
+def num_in_range(start, end):
+    #takes -   start (int): The starting number of the range     end (int): The ending number of the range.
+    #calculates - The sum of the numbers in the range
+    #returns - If the recursion limit is reached
+    if start>end:
+        return 0
+    else:
+        return start + num_in_range(start + 1, end)
+def reverse_digits(n):
+    #takes - The number to reverse its digits
+    #calculates - The number with its digits reversed
+    #returns - If the number cannot be converted to a string
+    return int(str(n))[::-1] if n>0 else 0
+
+def main():
+    while True:
+        #takes - none
+        #calculates - none
+        #returns - none
+        choice = menu()
+        if choice == 10:
+            print("Exiting the program.")
+            break
+        elif choice in range(1, 10):
+            if choice in [1, 2, 3, 4, 5, 6, 7, 9, 10]:
+                n = int(input("Enter a number: "))
+                if choice == 1:
+                    print(f"Factorial: {factorial(n)}")
+                elif choice == 2:
+                    print(f"Summation: {summation(n)}")
+                elif choice == 3:
+                    m = int(input("Enter the exponent: "))
+                    print(f"Power: {powers(n, m)}")
+                elif choice == 4:
+                    print(f"Fibonacci: {fibonacci(n)}")
+                elif choice == 5:
+                    print(f"Sum of digits: {sum_of_digits(n)}")
+                elif choice == 6:
+                    print(f"Product of digits: {product_of_digits(n)}")
+                elif choice == 7:
+                    m = int(input("Enter another number: "))
+                    print(f"Product of two numbers: {product_two_whole_numbers(n, m)}")
+                elif choice == 8:
+                    print(f"Reversed digits: {reverse_digits(n)}")
+                elif choice == 9:
+                    start = int(input("Enter the start of the range: "))
+                    end = int(input("Enter the end of the range: "))
+                    print(f"Sum in range: {num_in_range(start, end)}")
+                
+            else:
+                print("Invalid choice, please choose a valid option.")
+main()
